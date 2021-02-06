@@ -6,24 +6,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 </head>
-
+<style>
+	#countriesDiv{
+		text-align: center;
+	}
+	.country{
+		width: 200px;
+		border:1px solid goldenrod;
+		margin:10px;
+	}
+	.countryName{
+		color: 0a0a0a;
+	}
+</style>
 <body>
-	<ul id="countriesDiv"></ul>
+	<div id="countriesDiv"></div>
 	<script>
 		fetch('https://restcountries.eu/rest/v2/all')
 			.then(res => res.json())
 			.then(data => {
 				for (let i = 0; i < data.length; i++) {
 					const element = data[i];
-					const ul = document.getElementById('countriesDiv');
+					const countriesDiv = document.getElementById('countriesDiv');
+
 					const countryDiv = document.createElement("div");
-					const h3 = document.createElement('h3');
-					h3.innerText = element.name;
-					const p = document.createElement('p');
-					p.innerText = element.capital;
-					countryDiv.appendChild(h3);
-					countryDiv.appendChild(p);
-					ul.appendChild(countryDiv);
+					// const h3 = document.createElement('h3');
+					// h3.innerText = element.name;
+					// const p = document.createElement('p');
+					// p.innerText = element.capital;
+					// countryDiv.appendChild(h3);
+					// countryDiv.appendChild(p);
+					// ul.appendChild(countryDiv);
+
+					//Alternative way to define
+					const countryInfo = `
+					<h3 class="countryName">${element.name}</h3>
+					<p>${element.capital}</p>
+					`;
+					countryDiv.innerHTML = countryInfo;
+					countriesDiv.appendChild(countryDiv);
+
+					countryDiv.className = 'country';
+
+
+
 				}
 			})
 	</script>
